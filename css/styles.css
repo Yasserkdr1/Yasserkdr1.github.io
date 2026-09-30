@@ -759,3 +759,88 @@ button { font: inherit; }
   .mobile-featured-summary p { font-size: .84rem; }
   .architecture-modal { width: calc(100vw - 16px); border-radius: 14px; }
 }
+
+/* Certification gallery: real certificate previews with direct verification links */
+.credentials-section {
+  border-top: 1px solid var(--line);
+  background: rgba(14,18,20,.42);
+}
+.credentials-heading { margin-bottom: 38px; }
+.credentials-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+.credential-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #354046;
+  border-radius: var(--radius);
+  background: linear-gradient(145deg, rgba(28,36,41,.98), rgba(19,25,29,.98));
+  box-shadow: 0 16px 38px rgba(0,0,0,.14);
+  transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.credential-card:hover { border-color: #59676e; transform: translateY(-3px); box-shadow: var(--shadow); }
+.credential-preview {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: clamp(220px, 27vw, 320px);
+  overflow: hidden;
+  background: #e9edef;
+  border-bottom: 1px solid var(--line);
+}
+.credential-preview img {
+  width: 100%; height: 100%; object-fit: contain; padding: 12px;
+  transition: transform .25s ease;
+}
+.credential-preview:hover img, .credential-preview:focus-visible img { transform: scale(1.025); }
+.preview-label {
+  position: absolute; right: 12px; bottom: 12px;
+  padding: 7px 9px; border: 1px solid rgba(255,255,255,.2); border-radius: 6px;
+  background: rgba(16,20,23,.86); color: #f3f5f4;
+  font-size: .58rem; font-weight: 800; letter-spacing: .1em;
+  opacity: 0; transform: translateY(4px); transition: opacity .2s ease, transform .2s ease;
+}
+.credential-preview:hover .preview-label, .credential-preview:focus-visible .preview-label { opacity: 1; transform: none; }
+.credential-preview:focus-visible, .verify-link:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
+.credential-details { padding: 20px 22px 22px; }
+.credential-issuer { color: var(--muted-2); font-size: .63rem; font-weight: 800; letter-spacing: .15em; }
+.credential-issuer span { color: var(--accent); padding-inline: 3px; }
+.credential-details h3 { margin: 10px 0 7px; font-size: clamp(1.15rem, 1.6vw, 1.4rem); line-height: 1.2; letter-spacing: -.025em; }
+.credential-details p { min-height: 1.5em; margin: 0 0 15px; color: var(--muted); font-size: .84rem; }
+.verify-link {
+  display: inline-flex; align-items: center; gap: 7px;
+  color: var(--accent); font-size: .82rem; font-weight: 700; text-decoration: none;
+}
+.verify-link:hover { color: #ead9a6; text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 760px) {
+  .credentials-heading { margin-bottom: 28px; }
+  .credentials-grid { grid-template-columns: 1fr; gap: 18px; }
+  .credential-preview { height: clamp(210px, 62vw, 285px); }
+  .credential-details { padding: 18px; }
+  .credential-details h3 { font-size: 1.16rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .credential-card, .credential-preview img, .preview-label { transition: none; }
+}
+
+/* Gallery v3: visible proof, generous touch targets and mobile navigation. */
+#credentials, #focus { scroll-margin-top: 90px; }
+.credential-card { display: flex; flex-direction: column; background: var(--panel); }
+.credential-preview { flex: 0 0 auto; }
+.credential-preview img { min-height: 0; min-width: 0; }
+.credential-details { display: flex; flex-direction: column; flex: 1; align-items: flex-start; }
+.verify-link { min-height: 44px; margin-top: auto; padding: 10px 14px; border: 1px solid var(--accent-dim); border-radius: 7px; }
+.verify-link:hover { background: rgba(210,189,131,.08); text-decoration: none; }
+.preview-label { opacity: 1; transform: none; }
+@media (max-width: 680px) {
+ .nav { gap: 12px; font-size: .72rem; }
+ .nav a[href*="linkedin.com"] { display: none; }
+ .nav-wrap { gap: 10px; }
+ .credential-issuer { line-height: 1.6; letter-spacing: .09em; }
+ .credential-card:hover { transform: none; }
+}
+@media (max-width: 360px) {
+ .nav { gap: 8px; font-size: .66rem; }
+}
